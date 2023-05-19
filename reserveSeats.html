@@ -15,6 +15,23 @@
 
         function setSeat(seatNum, status) {
             document.getElementById("seat" + seatNum).src = "https://www.yama.info.waseda.ac.jp/~yamana/LECTURE/CSWP/seat_" + status + ".png";
+            document.getElementById("seat" + seatNum).setAttribute("class",status);
+        }
+
+        function getSeatStatus(seatClass) {
+            switch (seatClass) {
+                case "avail":
+                    return "空いています";
+                case "unavail":
+                    return "他の方が予約済みです";
+                case "select":
+                    return "あなたの予約済み席です";
+            }
+        }
+
+        function showStatus(seat) {
+            let seatClass = seat.getAttribute("class");
+            alert("この席は" + getSeatStatus(seatClass));
         }
 
         function initSeats() {
@@ -28,6 +45,7 @@
                         // シートが埋まっている場合の処理
                         setSeat(i * seats[i].length + j, "unavail");
                     }
+                    document.getElementById("seat" + (i * seats[i].length + j)).setAttribute("onclick","showStatus(this)");
                 }
             }
         }
