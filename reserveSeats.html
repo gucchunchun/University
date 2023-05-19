@@ -1,1 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>席予約</title>
+    <script type="text/javascript">
+        
+      // 座席データ trueであれば空、falseであれば指定済 
+      // seats[x][y]でx行yカラム目を指定 
+      var seats = [[ false, true, false, true, true, true, false, true, false ],
+                   [ false, true, false, false, true, false, true, true, true ],
+                   [ true, true, true, true, true, true, false, true, false ],
+                   [ true, true, true, false, true, false, false, true, false ]];
 
+      function initSeats() {
+        // HTML内の「img id="seat0" src=""」のsrcに値を設定
+        for (var i = 0; i < seats.length; i++) { // seatsは４行なのでseats.lengthは4になる。
+          for (var j = 0; j < seats[i].length; j++) { // seats[i].lengthはi行目のカラム数（9）
+            if (seats[i][j]) {
+              // シートに空きがある場合の処理
+              document.getElementById("seat" + (i * seatss[i].length + j)).src = "https://www.yama.info.waseda.ac.jp/~yamana/LECTURE/CSWP/seat_avail.png";
+            }
+            else {
+              // シートが埋まっている場合の処理
+              document.getElementById("seat" + (i * seats[i].length + j)).src = "https://www.yama.info.waseda.ac.jp/~yamana/LECTURE/CSWP/seat_unavail.png";
+            }
+          }
+        }
+      }
+
+      function findSeats() {
+        var finished = 0; // 予約が終了したかどうかを示すフラグ 0:未終了
+        // ３つ連続して空いている席を探す
+        var i = 0; 
+        while (i < seats.length && finished == 0) { // 座席の最後まで探す
+          for (var j = 0; j < seats[i].length - 2; j++) {
+            // 現在の席とその次からの２つの座席が空いているかチェック
+            if (seats[i][j] && seats[i][j + 1] && seats[i][j + 2]) {
+              // 空いているので、席を予約するか確認？
+              var accept = confirm((i + 1)+"列の" + (j + 1) + "番から" + (j + 3) +
+                "番があいています。予約しますか？");
+              if (accept) {
+                // ユーザがアクセプトしたら終わり（breakを実行しループから抜ける）。
+                finished = 1;
+                seats[i][j]=seats[i][j + 1]=seats[i][j + 2]=false; //予約済にする
+                document.getElementById("seat" + (i * seats[i].length + j)).src = "https://www.yama.info.waseda.ac.jp/~yamana/LECTURE/CSWP/seat_select.png";
+                document.getElementById("seat" + (i * seats[i].length + j + 1)).src = "https://www.yama.info.waseda.ac.jp/~yamana/LECTURE/CSWP/seat_select.png";
+                document.getElementById("seat" + (i * seats[i].length + j + 2)).src = "https://www.yama.info.waseda.ac.jp/~yamana/LECTURE/CSWP/seat_select.png";
+                break;
+                  } // if (accept)
+              } // if
+            } // for
+          // 外側のループのカウンタをインクリメント（次の行へ移る）
+          i++;
+        } // while
+      }
+    </script>
+  </head>
+
+  <body onload="initSeats();">
+    <div style="margin-top:25px; text-align:center">
+      <img id="seat0" src="" />
+      <img id="seat1" src="" />
+      <img id="seat2" src="" />
+      <img id="seat3" src="" />
+      <img id="seat4" src="" />
+      <img id="seat5" src="" />
+      <img id="seat6" src="" />
+      <img id="seat7" src="" />
+      <img id="seat8" src="" /><br />
+      <img id="seat9" src="" />
+      <img id="seat10" src="" />
+      <img id="seat11" src="" />
+      <img id="seat12" src="" />
+      <img id="seat13" src="" />
+      <img id="seat14" src="" />
+      <img id="seat15" src="" />
+      <img id="seat16" src="" />
+      <img id="seat17" src="" /><br />
+      <img id="seat18" src="" />
+      <img id="seat19" src="" />
+      <img id="seat20" src="" />
+      <img id="seat21" src="" />
+      <img id="seat22" src="" />
+      <img id="seat23" src="" />
+      <img id="seat24" src="" />
+      <img id="seat25" src="" />
+      <img id="seat26" src="" /><br />
+      <img id="seat27" src="" />
+      <img id="seat28" src="" />
+      <img id="seat29" src="" />
+      <img id="seat30" src="" />
+      <img id="seat31" src="" />
+      <img id="seat32" src="" />
+      <img id="seat33" src="" />
+      <img id="seat34" src="" />
+      <img id="seat35" src="" /><br />
+      <input type="button" id="findseats" value="Find Seats" onclick="findSeats();" />
+    </div>
+  </body>
+</html>
