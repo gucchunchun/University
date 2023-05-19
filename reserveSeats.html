@@ -18,7 +18,7 @@
           for (var j = 0; j < seats[i].length; j++) { // seats[i].lengthはi行目のカラム数（9）
             if (seats[i][j]) {
               // シートに空きがある場合の処理
-              document.getElementById("seat" + (i * seatss[i].length + j)).src = "https://www.yama.info.waseda.ac.jp/~yamana/LECTURE/CSWP/seat_avail.png";
+              document.getElementById("seat" + (i * seats[i].length + j)).src = "https://www.yama.info.waseda.ac.jp/~yamana/LECTURE/CSWP/seat_avail.png";
             }
             else {
               // シートが埋まっている場合の処理
