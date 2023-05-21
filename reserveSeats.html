@@ -15,11 +15,12 @@
 
         function setSeat(seatNum, status) {
             document.getElementById("seat" + seatNum).src = "https://www.yama.info.waseda.ac.jp/~yamana/LECTURE/CSWP/seat_" + status + ".png";
-            document.getElementById("seat" + seatNum).setAttribute("class",status);
+            // document.getElementById("seat" + seatNum).setAttribute("class",status);
+            document.getElementById("seat" + seatNum).name = status;
         }
 
-        function getSeatStatus(seatClass) {
-            switch (seatClass) {
+        function getSeatStatus(status) {
+            switch (status) {
                 case "avail":
                     return "空いています";
                 case "unavail":
@@ -30,8 +31,9 @@
         }
 
         function showStatus(seat) {
-            let seatClass = seat.getAttribute("class");
-            alert("この席は" + getSeatStatus(seatClass));
+            // let seatClass = seat.getAttribute("class");
+            let status =seat.name;
+            alert("この席は" + getSeatStatus(status));
         }
 
         function initSeats() {
