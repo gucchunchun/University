@@ -19,7 +19,7 @@ def mainColour(sample):
     cluster.fit(X=cv2_img)
     cluster_centers_arr = cluster.cluster_centers_.astype(int, copy=False)
 
-    # 幅と高さ64px × 横並び5画像 + 上下左右余白15pxずつの画像を作ります。
+    # 幅と高さ64px × 横並び5画像を作ります。
     IMG_SIZE = 64
     width = IMG_SIZE * 5
     height = IMG_SIZE
